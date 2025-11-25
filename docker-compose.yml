@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sgcs-app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/var/www/html/storage
+    networks:
+      - sgcs-network
+
+networks:
+  sgcs-network:
+    driver: bridge
